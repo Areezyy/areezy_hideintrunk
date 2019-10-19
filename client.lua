@@ -1,5 +1,5 @@
 		local player = PlayerPedId()
-		local inside = false
+		local ibaklucka = false
 
 	Citizen.CreateThread(function()
 	  	while true do
@@ -12,7 +12,7 @@
 
 		    if IsDisabledControlPressed(0, 19) and IsDisabledControlJustReleased(1, 54) and GetVehiclePedIsIn(player, false) == 0 and DoesEntityExist(vehicle) and IsEntityAVehicle(vehicle) then
 			 	SetVehicleDoorOpen(vehicle, 5, false, false)    	
-		    	if not inside then
+		    	if not ibaklucka then
 		        	AttachEntityToEntity(player, vehicle, -1, 0.0, -2.0, 0.335, 0.0, 0.0, 0.0, false, false, false, false, 20, true)		       		
 		       		RaiseConvertibleRoof(vehicle, false)
 		       		if IsEntityAttached(player) then
@@ -25,23 +25,23 @@
 		               	end)
 		            end    
 		           	
-		    		inside = true					         		
+		    		ibaklucka = true					         		
 		    		else
-		    		inside = false
+		    		ibaklucka = false
 		    		end   			
-		    	elseif inside and IsDisabledControlPressed(0, 19) and IsDisabledControlJustReleased(1, 54) then
+		    	elseif ibaklucka and IsDisabledControlPressed(0, 19) and IsDisabledControlJustReleased(1, 54) then
 		    		DetachEntity(player, true, true)
 		    		SetEntityVisible(player, true, true)
 		   			ClearPedTasks(player)   
-		    		inside = false
+		    		ibaklucka = false
 					ClearAllHelpMessages()		    	
 
 		    	end
 		    	Citizen.Wait(2000)
 		    	SetVehicleDoorShut(vehicle, 5, false)    	
 		    end
-	    	if DoesEntityExist(vehicle) and IsEntityAVehicle(vehicle) and not inside and GetVehiclePedIsIn(player, false) == 0 then
-			elseif DoesEntityExist(vehicle) and inside then
+	    	if DoesEntityExist(vehicle) and IsEntityAVehicle(vehicle) and not ibaklucka and GetVehiclePedIsIn(player, false) == 0 then
+			elseif DoesEntityExist(vehicle) and ibaklucka then
 		    		car = GetEntityAttachedTo(player)
 		    		carxyz = GetEntityCoords(car, 0)
 		   			local visible = true
@@ -60,11 +60,11 @@
 		    					visible = false			
 		    				end   	
 		    			end 					
-			elseif not DoesEntityExist(vehicle) and inside then
+			elseif not DoesEntityExist(vehicle) and ibaklucka then
 		    		DetachEntity(player, true, true)
 		    		SetEntityVisible(player, true, true)
 		   			ClearPedTasks(player)  	  
-		    		inside = false		
+		    		ibaklucka = false		
 		   			ClearAllHelpMessages()	 		    			
 			end  	
 	  	end
@@ -91,7 +91,7 @@ function loadAnimDict(dict)
  end
 end
 
-function VehicleInFront()
+function FordonFram()
     local pos = GetEntityCoords(player)
     local entityWorld = GetOffsetFromEntityInWorldCoords(player, 0.0, 6.0, 0.0)
     local rayHandle = CastRayPointToPoint(pos.x, pos.y, pos.z, entityWorld.x, entityWorld.y, entityWorld.z, 10, player, 0)
