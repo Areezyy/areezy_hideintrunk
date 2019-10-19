@@ -16,9 +16,6 @@
 		        	AttachEntityToEntity(player, vehicle, -1, 0.0, -2.0, 0.335, 0.0, 0.0, 0.0, false, false, false, false, 20, true)		       		
 		       		RaiseConvertibleRoof(vehicle, false)
 		       		if IsEntityAttached(player) then
-						--SetTextComponentFormat("STRING")
-						--AddTextComponentString('~s~~INPUT_CHARACTER_WHEEL~+~INPUT_WEAPON_SPECIAL_TWO~ Ta dig ut')
-						--DisplayHelpTextFromStringLabel(0, 1, 1, -1)	
 						ClearPedTasksImmediately(player)
 						Citizen.Wait(100)	       			
 						TaskPlayAnim(player, 'timetable@floyd@cryingonbed@base', 'base', 1.0, -1, -1, 1, 0, 0, 0, 0)	
@@ -44,9 +41,6 @@
 		    	SetVehicleDoorShut(vehicle, 5, false)    	
 		    end
 	    	if DoesEntityExist(vehicle) and IsEntityAVehicle(vehicle) and not inside and GetVehiclePedIsIn(player, false) == 0 then
-						--SetTextComponentFormat("STRING")
-						--AddTextComponentString('~n~~s~~INPUT_CHARACTER_WHEEL~+~INPUT_WEAPON_SPECIAL_TWO~ För att gömma dig i bagaget')
-						--DisplayHelpTextFromStringLabel(0, 0, 1, -1)	
 			elseif DoesEntityExist(vehicle) and inside then
 		    		car = GetEntityAttachedTo(player)
 		    		carxyz = GetEntityCoords(car, 0)
@@ -54,12 +48,12 @@
 		   			DisableAllControlActions(0)
 		   			DisableAllControlActions(1)
 		   			DisableAllControlActions(2)
-		   			EnableControlAction(0, 0, true) --- V - camera
-		   			EnableControlAction(0, 249, true) --- N - push to talk	
-		   			EnableControlAction(2, 1, true) --- camera moving
-		   			EnableControlAction(2, 2, true) --- camera moving	
-		   			EnableControlAction(0, 177, true) --- BACKSPACE
-		   			EnableControlAction(0, 200, true) --- ESC					
+		   			EnableControlAction(0, 0, true)
+		   			EnableControlAction(0, 249, true) 
+		   			EnableControlAction(2, 1, true)
+		   			EnableControlAction(2, 2, true)	
+		   			EnableControlAction(0, 177, true) 
+		   			EnableControlAction(0, 200, true) 				
 		     			if IsDisabledControlJustPressed(1, 22) then
 		     				if visible then
 		    					SetEntityVisible(player, false, false)
@@ -89,15 +83,6 @@ function Streaming(animDict, cb)
 		cb()
 	end
 end
-
-RegisterCommand('dice', function(source, args, rawCommand)
- local number = math.random(1,6)
- loadAnimDict("anim@mp_player_intcelebrationmale@wank")
- TaskPlayAnim(GetPlayerPed(-1), "anim@mp_player_intcelebrationmale@wank", "wank", 8.0, 1.0, -1, 49, 0, 0, 0, 0)
- Citizen.Wait(1500)
- ClearPedTasks(GetPlayerPed(-1))
- TriggerEvent('chatMessage', '', {255, 0, 0}, 'Du slog en: '..number)
-end)
 
 function loadAnimDict(dict)
  while not HasAnimDictLoaded(dict) do
