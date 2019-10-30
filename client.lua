@@ -7,7 +7,7 @@
 
 		    	player = PlayerPedId()
 			local plyCoords = GetEntityCoords(player, false)
-			local vehicle = VehicleInFront()
+			local vehicle = FordonFram()
 
 
 		    if IsDisabledControlPressed(0, 19) and IsDisabledControlJustReleased(1, 54) and GetVehiclePedIsIn(player, false) == 0 and DoesEntityExist(vehicle) and IsEntityAVehicle(vehicle) then
